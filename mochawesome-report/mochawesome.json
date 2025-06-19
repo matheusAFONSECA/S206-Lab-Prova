@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 3,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-06-19T23:49:37.944Z",
+    "end": "2025-06-19T23:49:59.027Z",
+    "duration": 21083,
+    "testsRegistered": 4,
+    "passPercent": 75,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a1edac29-ea9d-40d9-9a0d-4dc75225a7ac",
+      "title": "",
+      "fullFile": "cypress\\e2e\\prova.cy.js",
+      "file": "cypress\\e2e\\prova.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ef0ff961-2579-46b2-98a3-0d6b528a47e5",
+          "title": "Cenários de testes para a Prova",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Realizar login com sucesso",
+              "fullTitle": "Cenários de testes para a Prova Realizar login com sucesso",
+              "timedOut": null,
+              "duration": 4561,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://www.saucedemo.com/');\nconst username = 'standard_user';\nconst password = 'secret_sauce';\ncy.get('[data-test=\"username\"]').type(username);\ncy.get('[data-test=\"password\"]').type(password);\ncy.get('[data-test=\"login-button\"]').click();",
+              "err": {},
+              "uuid": "99cfcead-3805-4c3e-9095-6b4c7ccd7c81",
+              "parentUUID": "ef0ff961-2579-46b2-98a3-0d6b528a47e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Realizar uma compra de todos os itens com sucesso",
+              "fullTitle": "Cenários de testes para a Prova Realizar uma compra de todos os itens com sucesso",
+              "timedOut": null,
+              "duration": 5589,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Fazer login\ncy.login();\n// colocar todos os itens no carrinho\ncy.get('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click();\ncy.get('[data-test=\"add-to-cart-sauce-labs-bike-light\"]').click();\ncy.get('[data-test=\"add-to-cart-sauce-labs-bolt-t-shirt\"]').click();\ncy.get('[data-test=\"add-to-cart-sauce-labs-fleece-jacket\"]').click();\ncy.get('[data-test=\"add-to-cart-sauce-labs-onesie\"]').click();\ncy.get('[data-test=\"add-to-cart-test.allthethings()-t-shirt-(red)\"]').click();\n// ir para o carrinho e realizar a compra\ncy.get('[data-test=\"shopping-cart-link\"]').click();\ncy.get('[data-test=\"checkout\"]').click();\ncy.preencherCheckout();\ncy.get('[data-test=\"continue\"]').click();\ncy.get('[data-test=\"finish\"]').click();\ncy.get('[data-test=\"title\"]').should('contain', 'Checkout: Complete!');\ncy.get('[data-test=\"complete-header\"]').should('contain', 'Thank you for your order!');\n// Fazer logout\ncy.log_out();",
+              "err": {},
+              "uuid": "29698033-4c9d-4d18-9657-e235e97b7626",
+              "parentUUID": "ef0ff961-2579-46b2-98a3-0d6b528a47e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Realizar a compra com o carrinho vazio",
+              "fullTitle": "Cenários de testes para a Prova Realizar a compra com o carrinho vazio",
+              "timedOut": null,
+              "duration": 5898,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Fazer login\ncy.login();\n// Ir para o carrinho e fazer uma compra vazia\ncy.get('[data-test=\"shopping-cart-link\"]').click();\ncy.get('[data-test=\"checkout\"]').click();\ncy.get('[data-test=\"error\"]').should('contain', 'Your cart is empty');\n// Fazer logout\ncy.log_out();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[data-test=\"error\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[data-test=\"error\"]`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/prova.cy.js:50:34)",
+                "diff": null
+              },
+              "uuid": "41649bab-e942-4b2d-9f1d-1dab50696f41",
+              "parentUUID": "ef0ff961-2579-46b2-98a3-0d6b528a47e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Realizar a compra de apenas um item",
+              "fullTitle": "Cenários de testes para a Prova Realizar a compra de apenas um item",
+              "timedOut": null,
+              "duration": 2777,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Fazer login\ncy.login();\n// escolher um item e adicionar ao carrinho\ncy.get('[data-test=\"item-4-title-link\"] > [data-test=\"inventory-item-name\"]').click();\ncy.get('[data-test=\"add-to-cart\"]').click();\n// voltar para a página de produtos e conferir se o item foi adicionado ao carrinho\ncy.get('[data-test=\"back-to-products\"]').click();\ncy.get('[data-test=\"remove-sauce-labs-backpack\"]').should('exist');\n// ir para o carrinho e realizar a compra\ncy.get('[data-test=\"shopping-cart-link\"]').click();\ncy.get('[data-test=\"checkout\"]').click();\ncy.preencherCheckout();\ncy.get('[data-test=\"continue\"]').click();\ncy.get('[data-test=\"finish\"]').click();\ncy.get('[data-test=\"title\"]').should('contain', 'Checkout: Complete!');\ncy.get('[data-test=\"complete-header\"]').should('contain', 'Thank you for your order!');\ncy.log_out();",
+              "err": {},
+              "uuid": "6de7df97-d8c9-4410-a4c8-5b708084ee0a",
+              "parentUUID": "ef0ff961-2579-46b2-98a3-0d6b528a47e5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "99cfcead-3805-4c3e-9095-6b4c7ccd7c81",
+            "29698033-4c9d-4d18-9657-e235e97b7626",
+            "6de7df97-d8c9-4410-a4c8-5b708084ee0a"
+          ],
+          "failures": [
+            "41649bab-e942-4b2d-9f1d-1dab50696f41"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 18825,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
