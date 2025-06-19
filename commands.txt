@@ -1,6 +1,9 @@
 -  Install cypress:
 npm install cypress --save-dev
 
+- Initialize cypress:
+./node_modules/.bin/cypress open
+
 - Run cypress:
 npx cypress run
 
