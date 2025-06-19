@@ -1,0 +1,20 @@
+-  Install cypress:
+npm install cypress --save-dev
+
+- Run cypress:
+npx cypress run
+
+- Install mochawesome:
+npm i cypress-mochawesome-reporter
+
+- Create report with mochawesome:
+npx cypress run --reporter mochawesome
+
+- Install newman:
+npm i newman
+
+- Install newman reporter html extension:
+npm i newman-reporter-htmlextra
+
+- Run newman reporter:
+npx newman run path -e path -r htmlextra
