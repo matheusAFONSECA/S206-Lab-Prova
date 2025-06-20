@@ -20,4 +20,4 @@ npm i newman
 npm i newman-reporter-htmlextra
 
 - Run newman reporter:
-npx newman run path -e path -r htmlextra
+npx newman run postman/ProvaS206.postman_collection.json -e postman/ProvaS206Env.postman_environment.json -r htmlextra
