@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "828abb35-c5c7-4bb8-9e1c-50245ee6eade",
+		"name": "ProvaS206",
+		"description": "Usei uma API pública para testar. Link para a documentação da API: [https://jsonplaceholder.typicode.com/](https://jsonplaceholder.typicode.com/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35951080"
+	},
+	"item": [
+		{
+			"name": "Todos os posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(Array.isArray(jsonData)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Should return at least 1 post\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.be.greaterThan(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}posts",
+					"host": [
+						"{{BaseURL}}posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar um post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201 (Created)\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains new post ID\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Title and Body are correct\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.eql(\"Meu post para a Prova\");\r",
+							"    pm.expect(jsonData.body).to.eql(\"Fé que vou com 100zin nessa Prova. Faz a boa vitinhuuuu!\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Meu post para a Prova\",\r\n  \"body\": \"Fé que vou com 100zin nessa Prova. Faz a boa vitinhuuuu!\",\r\n  \"userId\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}posts",
+					"host": [
+						"{{BaseURL}}posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar um post invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code should be 400 (Bad Request)\", function () {\r",
+							"    // Espera um erro, mas vai receber 201 (falha esperada)\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Payload should include 'title' and 'body'\", function () {\r",
+							"    // Está testando a presença de campos que não foram enviados\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"title\");\r",
+							"    pm.expect(jsonData).to.have.property(\"body\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"invalidField\": \"F pra nois nesse teste\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}posts",
+					"host": [
+						"{{BaseURL}}posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar um post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (OK)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is empty\", function () {\r",
+							"    pm.expect(pm.response.text()).to.eql(\"{}\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}posts/1",
+					"host": [
+						"{{BaseURL}}posts"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar um post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 (OK)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Post was updated\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.eql(\"Semestre atualizado\");\r",
+							"    pm.expect(jsonData.body).to.eql(\"P10 tá ai né, vem ni mim TCCzinhuu!!\");\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"title\": \"Semestre atualizado\",\r\n  \"body\": \"P10 tá ai né, vem ni mim TCCzinhuu!!\",\r\n  \"userId\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}posts/1",
+					"host": [
+						"{{BaseURL}}posts"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
